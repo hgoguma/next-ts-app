@@ -1,0 +1,92 @@
+$cs-login-logo-width: 164px;
+$cs-login-logo-height: 47px;
+$cs-login-title-font-size: 28px;
+$cs-login-title-font-weight: 700;
+$cs-login-form-width: 500px;
+$cs-login-form-min-height: 300px;
+$cs-login-form-label-font-size: 16px;
+$cs-login-form-btn-submit-height: 50px;
+$cs-login-footer-font-size: 12px;
+
+.login {
+  &__container {
+    width: 100vw;
+    height: 100vh;
+  }
+  &__title {
+    color: #657f87;
+    font-size: $cs-login-title-font-size;
+    font-weight: $cs-login-title-font-weight;
+    line-height: 27px;
+    letter-spacing: -0.28px;
+    padding-top: 15px;
+  }
+  &__form {
+    min-width: 700px;
+    max-width: 1000px;
+    min-height: 500px;
+    max-height: 800px;
+    margin: 0 auto;
+    padding: 300px 300px 0 300px;
+
+    &__item {
+      // max-width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    &__label {
+      margin-right: 10px;
+    }
+    &__input {
+      width: 300px !important;
+      height: 40px !important;
+      &.id {
+        &::before {
+          content: "";
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          // background: url("~/assets/img/icons/icon_login_id.png") no-repeat;
+          position: absolute;
+          top: 7px;
+          left: 8px;
+        }
+      }
+      &.password {
+        &::before {
+          content: "";
+          width: 14px;
+          height: 20px;
+          display: inline-block;
+          // background: url("~/assets/img/icons/icon_login_pwd.png") no-repeat;
+          position: absolute;
+          top: 7px;
+          left: 10px;
+        }
+        .el-input__suffix {
+          display: none;
+        }
+      }
+    }
+    .cs-warnning {
+      visibility: hidden;
+      min-height: 24px;
+      margin-bottom: 40px;
+      &.is-show {
+        visibility: visible;
+      }
+    }
+  }
+  &__footer {
+    font-size: $cs-login-footer-font-size;
+    line-height: 17px;
+    letter-spacing: -0.1px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,0 +1,36 @@
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-body {
+  padding-top: 45px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  &-container {
+    width: calc(100% - 200px);
+    flex: auto;
+    overflow: auto;
+    background-color: #f7f8fa;
+  }
+}
