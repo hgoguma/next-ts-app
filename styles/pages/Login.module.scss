@@ -1,0 +1,54 @@
+.login {
+  &__wrap {
+    width: 100vw;
+    height: 100vh;
+    padding: 100px;
+    background-color: #f2c4bf;
+  }
+  &__container {
+    display: flex;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 1px 3.9px 2.1px rgba(0, 0, 0, 0.17);
+
+    > div {
+      width: 50%;
+    }
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/images/login.jpg") no-repeat;
+    background-size: contain;
+  }
+  &__form {
+    margin: 0 auto;
+    padding: 200px 250px;
+    &__item {
+      width: 100%;
+      margin-bottom: 20px;
+      > div {
+        width: 100% !important;
+      }
+    }
+    &__btn {
+      display: block;
+      margin-bottom: 15px;
+      width: 100%;
+      height: 50px;
+      &__container {
+        margin-top: 60px;
+      }
+    }
+    .cs-warnning {
+      visibility: hidden;
+      min-height: 24px;
+      margin-bottom: 40px;
+      &.is-show {
+        visibility: visible;
+      }
+    }
+  }
+}

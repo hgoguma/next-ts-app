@@ -1,16 +1,19 @@
 import styles from '@/styles/layouts/Header.module.scss'
 import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
 import { Manager } from 'socket.io-client'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import HomeIcon from '@mui/icons-material/Home';
 import { Avatar, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { deepOrange } from '@mui/material/colors';
+import { useRecoilState } from 'recoil'
+import { userState } from '@/recoil/user/index'
 
 const avatarSize = {
   width: '30px',
   height: '30px'
 }
-
 const logoutBtn = {
   color: '#fff',
   bgColor: '#73c78a',
@@ -33,10 +36,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Header = () => {
+  const [user, setUser] = useRecoilState(userState);
   const classes = useStyles();
+  const router = useRouter();
   const [count, setCount] = useState(0);
+
   useEffect(() => {
-    socketInitializer()
+    // socketInitializer()
   }, [])
 
   const socketInitializer = async () => {
@@ -49,11 +55,20 @@ const Header = () => {
     socket.on('getAlarmCount', (res) => {
       setCount(res.count)
     })
+    socket.on('disconnect', () => {
+      console.log('disconnected')
+      
+    })
   }
+
+  const toMain = useCallback(() => {
+    router.push('/')
+  }, [])
 
   return (
     <header className={styles['header']}>
       <div className={styles['left-area']}>
+        <HomeIcon onClick={toMain} />
       </div>
       <div className={styles['right-area']}>
         <div className={styles['alarm-container']}>
@@ -61,9 +76,9 @@ const Header = () => {
           <div className={styles['count']}>{count}</div>
         </div>
         <div className={styles['avatar-container']}>
-          <Avatar alt="H.ONE" className={classes.orangeAvatar}>H</Avatar>
+          <Avatar src={user.photoURL} alt={user.displayName} />
         </div>
-        <Button variant="contained" disableElevation size={'small'} className={classes.logoutBtn}>로그아웃</Button>
+        <Button variant="contained" disableElevation size={'medium'} className={classes.logoutBtn}>로그아웃</Button>
       </div>
     </header>
   );

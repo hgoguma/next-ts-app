@@ -6,11 +6,14 @@
       "@/components/*": ["components/*"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],
+      "@/assets/*": ["assets/*"],
       "@/config/*": ["config/*"],
       "@/redux/*": ["redux/*"],
+      "@/recoil/*": ["recoil/*"],
       "@/utils/*": ["utils/*"],
       "@/types/*": ["types/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/firebase/*": ["firebase/*"]
     },
     "target": "es5",
     "lib": [

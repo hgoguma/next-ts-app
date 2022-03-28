@@ -1,21 +1,47 @@
 import { useCallback, useEffect, useState } from 'react'
-import { userAuthActions } from '@/redux/reducers/auth'
-import { useAppSelector, useAppDispatch } from '@/redux/store'
+import { useQuery } from 'react-query'
+import axios from 'axios'
+import { Movie } from '@/types/api/movie'
+import { Container, Grid } from '@mui/material';
+import MovieCard from '@/components/UIComponents/movieCard'
+
+const fetchMovieList = async () => {
+  const apiKey = `a057695fbd8c572ea242410ec4f2a78f`
+  const lang = `ko-KR`
+  const pageNum = 1
+  const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=${lang}&page=${pageNum}`
+  const { data } = await axios.get(url)
+  return data.results || []
+}
+
+const getMovieList = () => {
+  return useQuery('movie', async () => {
+    const data: Movie[] = await fetchMovieList();
+    console.log(data)
+    return data
+  })
+}
 
 const Home = () => {
-  const { userName } = useAppSelector((state) => state.auth.data)
-  const dispatch = useAppDispatch()
-  const test = useCallback(async () => {
-    const loginId = `AQ0001`
-    const params = { loginId }
-    const { request } = userAuthActions
-    dispatch(request(params))
-  }, []);
-
+  const { status, data, error, isFetching } = getMovieList()
+  
   return (
-    <div>
-      Home 입니다요
-    </div>
+    <Container maxWidth="1720">
+      <Grid container>
+        {status === 'success' && data?.map(item => {
+          return (
+            <MovieCard key={item.id}
+              title={item.title}
+              original_title={item.original_title}
+              backdrop_path={item.backdrop_path}
+              overview={item.overview}
+              id={item.id}
+            />
+          )
+        })
+        }
+      </Grid>
+    </Container>
   )
 }
 
