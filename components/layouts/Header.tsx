@@ -7,8 +7,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Avatar, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { deepOrange } from '@mui/material/colors';
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { userState } from '@/recoil/user/index'
+import { getAuth, signOut } from "firebase/auth";
+import { firebaseApp } from '@/firebase/index'
+
 
 const avatarSize = {
   width: '30px',
@@ -60,6 +63,20 @@ const Header = () => {
       
     })
   }
+  
+
+  const resetUser = useResetRecoilState(userState);
+
+  const handleLogout = useCallback(() => {
+    const auth = getAuth(firebaseApp);
+    try {
+      signOut(auth)
+      resetUser()
+      router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
   const toMain = useCallback(() => {
     router.push('/')
@@ -78,7 +95,7 @@ const Header = () => {
         <div className={styles['avatar-container']}>
           <Avatar src={user.photoURL} alt={user.displayName} />
         </div>
-        <Button variant="contained" disableElevation size={'medium'} className={classes.logoutBtn}>로그아웃</Button>
+        <Button variant="contained" disableElevation size={'medium'} className={classes.logoutBtn} onClick={handleLogout}>로그아웃</Button>
       </div>
     </header>
   );

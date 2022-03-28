@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import styles from '@/styles/pages/Login.module.scss';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,6 +9,7 @@ import { firebaseApp } from '@/firebase/index'
 import { userState } from '@/recoil/user/index'
 import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router';
+import { UserType } from '@/types/api/user'
 
 const Login: NextPage = () => {
 
@@ -35,7 +36,8 @@ const Login: NextPage = () => {
     try {
       const result = await signInWithPopup(auth, provider)
       const credential = GoogleAuthProvider.credentialFromResult(result)
-      const user = result.user
+      const userData: UserType = result.user
+      
       console.log(user)
       setUser(user)
       router.push('/')
@@ -48,6 +50,8 @@ const Login: NextPage = () => {
       const credential = GoogleAuthProvider.credentialFromError(error);
     }
   }, [])
+
+  // useEffect(())
 
   return ( 
     <div className={styles.login__wrap}>
