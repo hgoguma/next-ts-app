@@ -27,11 +27,12 @@ const Module = () => {
   useEffect(() => {
     loadData();
   }, [])
-
+ 
   return (
     <div>
       {/* <button type="button" onClick={() => loadData()}>ㅌㅅㅌ</button> */}
       <Table columns={columns} rows={rows} rowId={rowId} pageSize={12} /> 
+          
     </div>
   );
 };

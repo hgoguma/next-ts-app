@@ -12,7 +12,6 @@ import { userState } from '@/recoil/user/index'
 import { getAuth, signOut } from "firebase/auth";
 import { firebaseApp } from '@/firebase/index'
 
-
 const avatarSize = {
   width: '30px',
   height: '30px'

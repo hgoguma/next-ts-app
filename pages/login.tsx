@@ -14,9 +14,7 @@ import { UserType } from '@/types/api/user'
 const Login: NextPage = () => {
 
   const router = useRouter()
-
   const [user, setUser] = useRecoilState(userState);
-
   const idPlaceHolder = '아이디를 입력해주세요.'
   const pwdPlaceHolder = '비밀번호를 입력해주세요.'
   const [id, setId, handleId] = useInput<string>('')

@@ -24,8 +24,8 @@ const getMovieList = () => {
 
 const Home = () => {
   const { status, data, error, isFetching } = getMovieList()
-  
   return (
+    
     <Container maxWidth="1720">
       <Grid container>
         {status === 'success' && data?.map(item => {
